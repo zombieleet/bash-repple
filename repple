@@ -27,7 +27,7 @@ let histArray = require('./history').histArray;
 // customize repl
 
 var customRepl = repl.start({
-    prompt: 'my repl> ', // repl prompt
+    prompt: '> ', // repl prompt
     replMode: repl.REPL_MODE_STRICT, // run repl in strict mode
     ignoreUndefined: true, // Ignore not needed undefined messages
     eval: meval // function to evluate when a command is typed in the repl
