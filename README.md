@@ -1,4 +1,4 @@
-# repple.js
+# bash-repple.js
 
 Repple is a customize REPL ( READ EVAL PRINT LOOP ) that supports running of bash history expansion and substitution in node.js. It also supports running builtin commands through node
 
@@ -7,7 +7,7 @@ Repple is a customize REPL ( READ EVAL PRINT LOOP ) that supports running of bas
 
 ```
    // install it globally
-   npm install -g repple
+   npm install -g bash-repple
    
 ```
 
@@ -22,7 +22,7 @@ or
 runnning command line commands
 
 ```
-  repple
+  bash-repple
   > $ls
   file1.txt
   file2.txt
@@ -40,7 +40,7 @@ history manipulation
 // you should note that the history will be cleared whenever you close repple
 //   this will be fixed in the next release
 
-  repple
+ bash-repple
   > $ls
   file1.txt
   file2.txt
@@ -64,7 +64,7 @@ history manipulation
 history substitution
 
 ```
-   repple
+   bash-repple
    > $la // instead of ls you typed la
    error // more detailed
    > $^a^s
@@ -89,7 +89,7 @@ history substitution
 extra cool
 
 ```
-  repple
+  bash-repple
   > $git log --oneline --graphy --decorate --all // take note --graphy is suppose to be --graph
   error // more detailed
   > $git help log | grep --
@@ -106,7 +106,7 @@ extra cool
 redirection
 
 ```
-   repple
+   bash-repple
    > $grep "root" < /etc/passwd
    root:x:0:0:root:/root:/bin/bash
    
@@ -115,7 +115,7 @@ redirection
 
 loooooooooooop
 ```
-  repple
+  bash-repple
   > $for i in `seq 0 10`;do echo $i; done
   0
   1
