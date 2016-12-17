@@ -1,6 +1,6 @@
 # bash-repple.js
 
-Repple is a customize REPL ( READ EVAL PRINT LOOP ) that supports running of bash history expansion and substitution in node.js. It also supports running builtin commands through node
+bash-repple is a customize REPL ( READ EVAL PRINT LOOP ) that supports running of bash history expansion and substitution in node.js. It also supports running builtin commands through node
 
 
 # How to install
@@ -14,7 +14,7 @@ Repple is a customize REPL ( READ EVAL PRINT LOOP ) that supports running of bas
 or
 
 ```
-  git clone https://github.com/zombieleet/repple.git
+  git clone https://github.com/zombieleet/bash-repple.git
   
 ```
 # How to use
@@ -37,7 +37,7 @@ runnning command line commands
 history manipulation
 
 ```
-// you should note that the history will be cleared whenever you close repple
+// you should note that the history will be cleared whenever you close bash-repple
 //   this will be fixed in the next release
 
  bash-repple
