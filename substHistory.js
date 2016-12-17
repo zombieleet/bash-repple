@@ -43,7 +43,6 @@ function substHistory(cmd,callback) {
 	// save the regular expressions in brackets
 	let subst = cmd.match(/^\$!!\s+(\^.*)(\^.*)/);
 
-
 	// replace ^ in subst[1]
 	let match = new RegExp(subst[1].replace('^',''), 'g');
 
@@ -53,13 +52,16 @@ function substHistory(cmd,callback) {
 	// go up to the array by 1
 	cmd = histArray[histArray.length - 1]
 
-	// replace $ in the command , replace match with matchAgainst in the result
-	res = cmd.replace('$','').replace(match, matchAgainst);
+	
+	//replace $ in the command , replace match with matchAgainst in the result
+	//res = cmd.replace('$','').replace(match, matchAgainst);
 
+	
+	res = cmd.replace(match,matchAgainst)
 	// push the command to the end of the array
-	histArray.push(cmd.replace(match,matchAgainst));
-
+	histArray.push(res);
 	// execute the command
+
 	execHistory(res,callback);
 	
 	return true;
@@ -85,12 +87,11 @@ function substHistory(cmd,callback) {
 	cmd = histArray[histArray.length - goUpBy]
 
 	// replace $ in the command , replace match with matchAgainst in the result
-	res = cmd.replace('$','').replace(match,matchAgainst);
+	// res = cmd.replace('$','').replace(match,matchAgainst);
 
-	
+	res = cmd.replace(match,matchAgainst)
 	// push the command to the end of the array
-	histArray.push(cmd.replace(match,matchAgainst));
-
+	histArray.push(res);
 	// execute the command
 	execHistory(res,callback)
 	
