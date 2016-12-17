@@ -14,13 +14,16 @@ function checkHistory(cmd,callback) {
 	//   second regexp contains 0 or more of -
 	
 	cmd = cmd.match(/^(\$!!)(\s-*[a-zA-Z\_]{1,})*/);
-
+	
 	// save the second regexp
 	cmd = cmd[2]
 
-	
-	// append the second match in the history 
-	res = `${histArray[histArray.length - 1]} ${cmd}`
+	if ( cmd ) {
+	    // append the second match in the history 
+	    res = `${histArray[histArray.length - 1]} ${cmd}`
+	} else {
+	    res = histArray[histArray.length - 1]
+	}
 
 	histArray.push(res)
 
@@ -43,9 +46,13 @@ function checkHistory(cmd,callback) {
 
 	num = String(num).replace("-", "");
 
-	
+	if ( secondOption ) {
 
-	res = `${histArray[histArray.length - num]} ${secondOption}`;
+	    res = `${histArray[histArray.length - num]} ${secondOption}`;
+	    
+	} else {
+	    res = histArray[histArray.length - num]
+	}
 
 	histArray.push(res)
 	
