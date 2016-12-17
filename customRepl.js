@@ -1,26 +1,42 @@
 #!/usr/bin/env node
 
+// import fs module
 const fs = require('fs');
+
+// import repl module
 const repl = require('repl');
+
+// import vm module to run script in a more secured enviornement/interpreter
 const vm = require('vm');
+
+// import exec function in child_process module to execute shell commands
 const exec = require('child_process').exec
+
+// import checkHistory function in history module, to retrieve pass commands
 const checkHistory = require('./history').checkHistory
+
+// import substHistory function in substHistory module, for history substitution
 const substHistory = require('./substHistory').substHistory
 
-
+// import histArray global array from history module.
+//    this module will be imported in whereever it needs to be imported
+//    so that the contents of the array will be global
 let histArray = require('./history').histArray;
-// use eval
+
+
+// customize repl
 
 var customRepl = repl.start({
-    prompt: 'my repl> ',
-    replMode: repl.REPL_MODE_STRICT,
-    ignoreUndefined: true,
-    eval: meval
+    prompt: 'my repl> ', // repl prompt
+    replMode: repl.REPL_MODE_STRICT, // run repl in strict mode
+    ignoreUndefined: true, // Ignore not needed undefined messages
+    eval: meval // function to evluate when a command is typed in the repl
 });
 
 
 
 Number.isNegative = (num) => {
+    
     if ( ! num ) throw Error('Number was not specified');
 
     if ( typeof num !== 'number' ) throw Error(`${num} is not a number`)
@@ -35,54 +51,77 @@ Number.isNegative = (num) => {
     
 };
 
+
+
 function meval(cmd,context,filename,callback) {
     
     let result
+
+    // require will not be present in the vm. Assign it to the global object
     global.require = require
 
 
 
 
-    let fileExistence = fs.existsSync('.repplehist');
+    /*let fileExistence = fs.existsSync('.repplehist');
 
-    if ( !fileExistence ) {
+      if ( !fileExistence ) {
 	fs.writeFileSync('.repplehist', '');
     }
     
-    //fs.appendFileSync('.repplehist', cmd);
+    fs.appendFileSync('.repplehist', cmd);*/
+
     
-    
+    // test if the given command starts with a $ sign
     if ( /^\$/.test(cmd) ) {
+	
 
 
-	if ( checkHistory(cmd,callback) ) return 
-
-
+	// pass in the command and the callback function
+	//   to the subHistory function . If this test succeeds return from ths function
 	if ( substHistory(cmd,callback) ) return 
 
-
+	// pass in the typed command and the callback function to checkHistory function
+	// if the return value is true, return from this function
+	if ( checkHistory(cmd,callback) ) return 
+	
+	// remove the new line character automatically inserted whenever a command is
+	//    pushed to the histArray array
 	histArray.push(cmd.replace("\n",""))
+
+	
 	//fs.appendFileSync('.repplehist', cmd);
 
-	
+	// replace $ sign, Because no shell command begins with a dollar sign
 	cmd = cmd.replace("\$", "");
-	
+
+	// execute the command
 	exec(cmd, (err, data) => {
+	    
+	    // if there was an error throw that error
 	    if ( err ) throw err;
+	    
+	    // return the callback function with null and console.log(data)
+	    //   console.log(data) to elimnate the new line character and to properly
+	    //   format the output
 	    return callback(null,console.log(data))
 	});
-	
-	return ;
+
+	//return ;
     } else {
 	
 	//fs.appendFileSync('.repplehist', cmd);
+
+	// remove the new line character automatically inserted whenever a command is
+	//    pushed to the histArray array
 	histArray.push(cmd.replace("\n",""))
+
+	// run the command in a vm
 	result = vm.runInThisContext(cmd);
+
+	
+	// return the callback function with null and the result variable
 	return callback(null, result);
     }
 
 }
-
-
-
-
