@@ -19,7 +19,7 @@ function checkHistory(cmd,callback) {
 	
 	res = histArray[histArray.length - 1]
 
-	console.log(histArray)
+	histArray.push(res)
 	
 	callback(null, res)
 	
@@ -41,7 +41,7 @@ function checkHistory(cmd,callback) {
 
 	res = histArray[histArray.length - cmd];
 
-	console.log(histArray)
+	histArray.push(res)
 	
 	callback(null, res)
 	
