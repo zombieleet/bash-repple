@@ -7,40 +7,45 @@ function checkHistory(cmd,callback) {
     let res;
     
     
-    if ( /^\$!!/.test(cmd) ) {
+    if ( /^(\$!!)(\s-*[a-zA-Z\_]{1,})*/.test(cmd) ) {
 
-	cmd = cmd.replace("\$","");
+	// save the regular expression in brackets
+	//   first regexp contains !!
+	//   second regexp contains 0 or more of -
+	
+	cmd = cmd.match(/^(\$!!)(\s-*[a-zA-Z\_]{1,})*/);
+
+	// save the second regexp
+	cmd = cmd[2]
 
 	
-	//fs.appendFileSync('.repplehist', cmd);
-	
-	
-
-	
-	res = histArray[histArray.length - 1]
+	// append the second match in the history 
+	res = `${histArray[histArray.length - 1]} ${cmd}`
 
 	histArray.push(res)
-	
-	execHistory(res,callback)
 
+	execHistory(res,callback)
 	
 	return true;
 	
-    } else if ( /^\$!(-[0-9]+)/.test(cmd) ) {
+    } else if ( /^\$!(-[0-9]+)(\s-*[a-zA-Z\_]{1,})*/.test(cmd) ) {
 
 
 	
 	//fs.appendFileSync('.repplehist', cmd);
 
+	cmd = cmd.match(/^\$!(-[0-9]+)(\s-*[a-zA-Z\_]{1,})*/)
 	
-	cmd = parseInt(cmd.match(/^\$!(-[0-9]+)/)[1]);
+	let num = parseInt(cmd[1]);
 
+	let secondOption = cmd[2];
+	
 
-	cmd = String(cmd).replace("-", "");
+	num = String(num).replace("-", "");
 
 	
 
-	res = histArray[histArray.length - cmd];
+	res = `${histArray[histArray.length - num]} ${secondOption}`;
 
 	histArray.push(res)
 	
