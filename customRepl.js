@@ -1,9 +1,12 @@
+#!/usr/bin/env node
 
 const fs = require('fs');
 const repl = require('repl');
 const vm = require('vm');
 const exec = require('child_process').exec
 const checkHistory = require('./history').checkHistory
+const substHistory = require('./substHistory').substHistory
+
 
 let histArray = require('./history').histArray;
 // use eval
@@ -47,9 +50,6 @@ function meval(cmd,context,filename,callback) {
     }
     
     //fs.appendFileSync('.repplehist', cmd);
-
-
-    histArray.push(cmd.replace("\n",""))
     
     
     if ( /^\$/.test(cmd) ) {
@@ -57,6 +57,11 @@ function meval(cmd,context,filename,callback) {
 
 	if ( checkHistory(cmd,callback) ) return 
 
+
+	if ( substHistory(cmd,callback) ) return 
+
+
+	histArray.push(cmd.replace("\n",""))
 	//fs.appendFileSync('.repplehist', cmd);
 
 	
@@ -71,7 +76,7 @@ function meval(cmd,context,filename,callback) {
     } else {
 	
 	//fs.appendFileSync('.repplehist', cmd);
-	
+	histArray.push(cmd.replace("\n",""))
 	result = vm.runInThisContext(cmd);
 	return callback(null, result);
     }
