@@ -1,0 +1,35 @@
+{
+  "name": "repple",
+  "version": "1.0.0",
+  "description": "repple brings bash history expansion support in node, as well executing builtin commands through node",
+  "main": "repple.js",
+  "scripts": {
+    "test": "node repple.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zombieleet/repple.git"
+  },
+  "keywords": [
+    "repple",
+    "repl",
+    "read",
+    "eval",
+    "print",
+    "loop",
+    "bash",
+    "unix",
+    "linux",
+    "gnu",
+    "commandline",
+    "history",
+    "expansion",
+    "subsitution"
+  ],
+  "author": "73mp74710n (Zombie-l33t)",
+  "license": "SEE LICENSE IN README.md",
+  "bugs": {
+    "url": "https://github.com/zombieleet/repple/issues"
+  },
+  "homepage": "https://github.com/zombieleet/repple#readme"
+}
