@@ -1,4 +1,5 @@
 
+const execHistory = require('./exechistory').execHistory
 let histArray = [];
 
 function checkHistory(cmd,callback) {
@@ -8,7 +9,6 @@ function checkHistory(cmd,callback) {
     
     if ( /^\$!!/.test(cmd) ) {
 
-	
 	cmd = cmd.replace("\$","");
 
 	
@@ -21,7 +21,8 @@ function checkHistory(cmd,callback) {
 
 	histArray.push(res)
 	
-	callback(null, res)
+	execHistory(res,callback)
+
 	
 	return true;
 	
@@ -32,7 +33,7 @@ function checkHistory(cmd,callback) {
 	//fs.appendFileSync('.repplehist', cmd);
 
 	
-	cmd = parseInt(cmd.match(/^\$!(-[0-9]+|[0-9]+)/)[1]);
+	cmd = parseInt(cmd.match(/^\$!(-[0-9]+)/)[1]);
 
 
 	cmd = String(cmd).replace("-", "");
@@ -43,7 +44,7 @@ function checkHistory(cmd,callback) {
 
 	histArray.push(res)
 	
-	callback(null, res)
+	execHistory(res,callback)
 	
 	return true
     }
