@@ -1,6 +1,6 @@
 {
   "name": "bash-repple",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "repple brings bash history expansion support in node, as well executing builtin commands through node",
   "main": "bash-repple",
   "scripts": {
