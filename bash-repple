@@ -13,15 +13,15 @@ const vm = require('vm');
 const exec = require('child_process').exec
 
 // import checkHistory function in history module, to retrieve pass commands
-const checkHistory = require('./history').checkHistory
+const checkHistory = require('./lib/history').checkHistory
 
 // import substHistory function in substHistory module, for history substitution
-const substHistory = require('./substHistory').substHistory
+const substHistory = require('./lib/substHistory').substHistory
 
 // import histArray global array from history module.
 //    this module will be imported in whereever it needs to be imported
 //    so that the contents of the array will be global
-let histArray = require('./history').histArray;
+let histArray = require('./lib/history').histArray;
 
 
 // customize repl
@@ -32,26 +32,6 @@ var customRepl = repl.start({
     ignoreUndefined: true, // Ignore not needed undefined messages
     eval: meval // function to evluate when a command is typed in the repl
 });
-
-
-
-Number.isNegative = (num) => {
-    
-    if ( ! num ) throw Error('Number was not specified');
-
-    if ( typeof num !== 'number' ) throw Error(`${num} is not a number`)
-    
-
-    let _n = String(num);
-
-    if ( /^-/.test(_n) )
-	return true;
-
-    return false;
-    
-};
-
-
 
 function meval(cmd,context,filename,callback) {
     
