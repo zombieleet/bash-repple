@@ -1,6 +1,6 @@
 {
   "name": "bash-repple",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "repple brings bash history expansion support in node, as well executing builtin commands through node",
   "main": "bash-repple",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/zombieleet/bash-repple.git"
   },
   "bin":{
-     "bash-repple":"./bash-repple"
+     "bash-repple":"node ./bash-repple"
   },
   "keywords": [
     "repple",
