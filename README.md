@@ -131,7 +131,7 @@ loooooooooooop
 
 # Fix
 1. Commands Are not cleared anymore when you exit the repo. Commands from other node sessions can be manipulated  
-
+2. republished the latest release version because of a bug in package.json
 # Bug
 
 1. It does not cd to any directory
